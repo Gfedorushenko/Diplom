@@ -13,10 +13,10 @@ import java.util.Map;
 
 @Repository
 public class UsersRepositoryImpl implements UsersRepository {
-    private static final String FIND_USER_BY_LOGIN = "SELECT id, login, password from ddl.users where login=:login";
-    private static final String FIND_LOGIN_BY_AUTH_TOKEN = "SELECT Login from ddl.users where auth_token=:authtoken";
-    private static final String FIND_ID_BY_AUTH_TOKEN = "SELECT id from ddl.users where auth_token=:authtoken";
-    private static final String UPDATE_AUTH_TOKEN = "UPDATE ddl.users set auth_token=:authToken where login=:login";
+    private static final String FIND_USER_BY_LOGIN = "SELECT id, login, password from filestorage.users where login=:login";
+    private static final String FIND_LOGIN_BY_AUTH_TOKEN = "SELECT Login from filestorage.users where auth_token=:authtoken";
+    private static final String FIND_ID_BY_AUTH_TOKEN = "SELECT id from filestorage.users where auth_token=:authtoken";
+    private static final String UPDATE_AUTH_TOKEN = "UPDATE filestorage.users set auth_token=:authToken where login=:login";
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public UsersRepositoryImpl(DataSource dataSource) {
@@ -24,7 +24,7 @@ public class UsersRepositoryImpl implements UsersRepository {
     }
 
     public UserInfo findUserByUserName(String userName) {
-        Map<String, String> paramMap = new HashMap<String, String>();
+        Map paramMap = new HashMap();
         paramMap.put("login", userName);
         return namedParameterJdbcTemplate.queryForObject(FIND_USER_BY_LOGIN, paramMap, rowMapper());
     }
@@ -42,14 +42,14 @@ public class UsersRepositoryImpl implements UsersRepository {
     }
 
     private void updateAuthToken(String userLogin, String authToken) {
-        Map<String, String> paramMap = new HashMap<String, String>();
+        Map paramMap = new HashMap();
         paramMap.put("login", userLogin);
         paramMap.put("authToken", authToken);
         namedParameterJdbcTemplate.update(UPDATE_AUTH_TOKEN, paramMap);
     }
 
     public Long findIdByAuthToken(String authToken) {
-        Map<String, String> paramMap = new HashMap<String, String>();
+        Map paramMap = new HashMap();
         paramMap.put("authtoken",replacePref(authToken));
         return namedParameterJdbcTemplate.queryForObject(FIND_ID_BY_AUTH_TOKEN, paramMap, Long.class);
     }
@@ -66,7 +66,6 @@ public class UsersRepositoryImpl implements UsersRepository {
                 .password(rs.getString("password"))
                 .build();
     }
-
     private String generateKey(String name) {
         return DigestUtils.md5Hex(name + LocalDateTime.now().toString());
     }

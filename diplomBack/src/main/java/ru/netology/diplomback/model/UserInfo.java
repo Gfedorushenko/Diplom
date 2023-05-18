@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import jakarta.persistence.*;
+import lombok.NonNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,11 +14,13 @@ import java.util.Objects;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 public class UserInfo implements Serializable {
-
     @Id
     @GeneratedValue
     private long id;
+    @NonNull
     private String login;
+
+    @NonNull
     private String password;
 
     public UserInfo(String login, String password) {

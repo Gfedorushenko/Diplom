@@ -7,17 +7,14 @@ import java.io.IOException;
 import java.util.List;
 
 public interface FileService {
-    String userAuthorization(UserInfo user) throws RuntimeException;
-
-    void userLogout(String authToken);
 
     List<FileNameOut> getFilesList(int limit) throws RuntimeException;
 
-    void filePost(String authToken, String filename, MultipartFile file) throws RuntimeException, IOException;
+    void filePost(Long userId, String filename, MultipartFile multipartFile) throws RuntimeException, IOException;
 
-    void fileDelete(String authToken, String fileName) throws RuntimeException, IOException;
+    void fileDelete(Long userId, String fileName) throws RuntimeException, IOException;
 
-    FileOut fileGet(String authToken, String fileName) throws RuntimeException, IOException;
+    FileOut fileGet(Long userId, String fileName) throws RuntimeException, IOException;
 
-    void filePut(String authToken, String fileName, String name) throws RuntimeException;
+    void filePut(Long userId, String fileName, String name) throws RuntimeException;
 }
