@@ -32,7 +32,7 @@ public class FileRepositoryImpl implements FileRepository {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    public void post(FileInfo fileInfo) throws RuntimeException {
+    public void save(FileInfo fileInfo) throws RuntimeException {
         LocalDate uploadDate = LocalDate.now();
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         Map parameters = new HashMap();
@@ -60,7 +60,7 @@ public class FileRepositoryImpl implements FileRepository {
         return namedParameterJdbcTemplate.queryForObject(SELECT_HASH_BY_ID_AND_NAME, parameters, rowMapper());
     }
 
-    public void put(Long userId, String fileName, String name) throws RuntimeException {
+    public void update(Long userId, String fileName, String name) throws RuntimeException {
         Map parameters = new HashMap();
         parameters.put("userid", userId);
         parameters.put("filename", fileName);

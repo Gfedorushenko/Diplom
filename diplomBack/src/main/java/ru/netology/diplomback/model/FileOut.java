@@ -1,9 +1,6 @@
 package ru.netology.diplomback.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Objects;
 
@@ -26,4 +23,5 @@ public class FileOut {
     public int hashCode() {
         return Objects.hash(hash, file);
     }
+
 }

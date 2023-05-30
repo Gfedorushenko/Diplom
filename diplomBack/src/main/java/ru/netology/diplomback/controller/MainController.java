@@ -25,6 +25,11 @@ public class MainController {
         this.fileService = fileService;
     }
 
+    @GetMapping("/ok") //TODO Для отладки
+    public String getAllOk() {
+        return "ok";
+    }
+
     @PostMapping("/login")
     public String loginBack(@RequestBody Map<String, String> map) throws RuntimeException {
         return userService.userAuthentication(new UserInfo(map.get("login"), map.get("password")));
@@ -45,7 +50,7 @@ public class MainController {
                         @RequestParam("filename") String fileName,
                         @RequestParam(name = "file") MultipartFile multipartFile) throws IOException {
         userId=userService.userAuthorization(authToken);
-        fileService.filePost(userId,fileName, multipartFile);
+        fileService.fileSave(userId,fileName, multipartFile);
     }
 
     @DeleteMapping("/file")
@@ -67,6 +72,6 @@ public class MainController {
                         @RequestParam("filename") String fileName,
                         @RequestBody Map<String, String> map) {
         userId=userService.userAuthorization(authToken);
-        fileService.filePut(userId, fileName, map.get("filename"));
+        fileService.fileUpdate(userId, fileName, map.get("filename"));
     }
 }

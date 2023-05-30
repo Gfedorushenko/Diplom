@@ -16,11 +16,10 @@ public class UserServiceImpl implements UserService{
     }
 
     public String userAuthentication(UserInfo user) throws RuntimeException {
-        if (user.equals(usersRepository.findUserByUserName(user.getLogin())))
+        if (user.equals(usersRepository.findUserByUserName(user.getLogin()))) {
             return new LoginOut(usersRepository.addAuthToken(user)).toString();
-
-        else
-            throw new DataError("Bad credentials");
+        }
+        throw new DataError("Bad credentials");
     }
     public void userLogout(String authToken) {
         usersRepository.deleteAuthToken(authToken);
@@ -28,9 +27,9 @@ public class UserServiceImpl implements UserService{
 
     public long userAuthorization(String authToken)throws RuntimeException{
         Long userId = usersRepository.findIdByAuthToken(authToken);
-        if (userId == null)
+        if (userId == null) {
             throw new UnauthorizedError("Unauthorized error");
-        else
-            return userId;
+        }
+        return userId;
     }
 }

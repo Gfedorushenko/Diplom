@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.util.List;
 
 public interface FileRepository {
-    void post(FileInfo fileInfo) throws IOException;
+    void save(FileInfo fileInfo) throws IOException;
 
     void delete(Long userId,String fileName);
 
     FileOut get(Long userId, String fileName);
 
-    void put(Long userId,String fileName, String name);
+    void update(Long userId,String fileName, String name);
 
     List<FileNameOut> filesList(int limit);
 

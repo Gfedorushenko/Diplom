@@ -10,11 +10,13 @@ public interface FileService {
 
     List<FileNameOut> getFilesList(int limit) throws RuntimeException;
 
-    void filePost(Long userId, String filename, MultipartFile multipartFile) throws RuntimeException, IOException;
+    void fileSave(Long userId, String filename, MultipartFile multipartFile) throws RuntimeException, IOException;
 
     void fileDelete(Long userId, String fileName) throws RuntimeException, IOException;
 
     FileOut fileGet(Long userId, String fileName) throws RuntimeException, IOException;
 
-    void filePut(Long userId, String fileName, String name) throws RuntimeException;
+    void fileUpdate(Long userId, String fileName, String name) throws RuntimeException;
+
+    String generateHash(byte[] text);
 }

@@ -14,7 +14,7 @@ import ru.netology.diplomback.service.UserServiceImpl;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
-public class UserServiceTestMock {
+public class UserServiceTest {
     @Mock
     UsersRepository usersRepository;
     @InjectMocks
