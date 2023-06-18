@@ -1,5 +1,6 @@
 package ru.netology.diplomback.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.netology.diplomback.model.FileInfo;
 import ru.netology.diplomback.model.FileNameOut;
 import ru.netology.diplomback.model.FileOut;
@@ -7,7 +8,7 @@ import ru.netology.diplomback.model.FileOut;
 import java.io.IOException;
 import java.util.List;
 
-public interface FileRepository {
+public interface FileRepository{
     void save(FileInfo fileInfo) throws IOException;
 
     void delete(Long userId,String fileName);

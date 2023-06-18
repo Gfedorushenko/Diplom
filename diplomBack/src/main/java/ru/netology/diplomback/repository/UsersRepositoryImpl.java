@@ -3,7 +3,7 @@ package ru.netology.diplomback.repository;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import ru.netology.diplomback.model.UserInfo;
+import ru.netology.diplomback.model.UsersInfo;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
@@ -13,23 +13,23 @@ import java.util.Map;
 
 @Repository
 public class UsersRepositoryImpl implements UsersRepository {
-    private static final String FIND_USER_BY_LOGIN = "SELECT id, login, password from filestorage.users where login=:login";
-    private static final String FIND_LOGIN_BY_AUTH_TOKEN = "SELECT Login from filestorage.users where auth_token=:authtoken";
-    private static final String FIND_ID_BY_AUTH_TOKEN = "SELECT id from filestorage.users where auth_token=:authtoken";
-    private static final String UPDATE_AUTH_TOKEN = "UPDATE filestorage.users set auth_token=:authToken where login=:login";
+    private static final String FIND_USER_BY_LOGIN = "SELECT id, login, password from users where login=:login";
+    private static final String FIND_LOGIN_BY_AUTH_TOKEN = "SELECT Login from users where auth_token=:authtoken";
+    private static final String FIND_ID_BY_AUTH_TOKEN = "SELECT id from users where auth_token=:authtoken";
+    private static final String UPDATE_AUTH_TOKEN = "UPDATE users set auth_token=:authToken where login=:login";
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public UsersRepositoryImpl(DataSource dataSource) {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    public UserInfo findUserByUserName(String userName) {
+    public UsersInfo findUserByUserName(String userName) {
         Map paramMap = new HashMap();
         paramMap.put("login", userName);
         return namedParameterJdbcTemplate.queryForObject(FIND_USER_BY_LOGIN, paramMap, rowMapper());
     }
 
-    public String addAuthToken(UserInfo userInfo) {
+    public String addAuthToken(UsersInfo userInfo) {
         String authToken = generateKey(userInfo.getLogin());
         updateAuthToken(userInfo.getLogin(), authToken);
         return authToken;
@@ -59,8 +59,8 @@ public class UsersRepositoryImpl implements UsersRepository {
         return namedParameterJdbcTemplate.queryForObject(FIND_LOGIN_BY_AUTH_TOKEN, paramMap, String.class);
     }
 
-    private RowMapper<UserInfo> rowMapper() {
-        return (rs, rowNum) -> UserInfo.builder()
+    private RowMapper<UsersInfo> rowMapper() {
+        return (rs, rowNum) -> UsersInfo.builder()
                 .id(rs.getLong("id"))
                 .login(rs.getString("login"))
                 .password(rs.getString("password"))

@@ -1,9 +1,9 @@
 package ru.netology.diplomback.service;
 
-import ru.netology.diplomback.model.UserInfo;
+import ru.netology.diplomback.model.UsersInfo;
 
 public interface UserService {
-    String userAuthentication(UserInfo user) throws RuntimeException;
+    String userAuthentication(UsersInfo user) throws RuntimeException;
 
     void userLogout(String authToken);
 

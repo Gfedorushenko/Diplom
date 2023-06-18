@@ -19,12 +19,12 @@ import java.util.Map;
 
 @Repository
 public class FileRepositoryImpl implements FileRepository {
-    private static final String ADD_NEW_FILE = "INSERT INTO filestorage.files(file_name, file_size, file_hash,file_data, upload_date, user_id) VALUES (:filename, :filesize,:filehash,:filedata,:uploaddate,:userid)";
-    private static final String DELETE_FILE_BY_ID_AND_NAME = "DELETE FROM filestorage.files WHERE user_id=:userid and file_name =:filename";
-    private static final String COUNT_BY_ID_AND_NAME = "SELECT count(*) from filestorage.files where user_id=:userid and file_name =:filename";
-    private static final String UPDATE_FILE_BY_ID_AND_NAME = "UPDATE filestorage.files set file_name=:name where user_id=:userid and file_name=:filename";
-    private static final String SELECT_HASH_BY_ID_AND_NAME = "SELECT file_hash, file_data from filestorage.files where user_id=:userid and file_name=:filename";
-    private static final String SELECT_FILES_WITH_LIMIT = "SELECT file_name, file_size from filestorage.files LIMIT :limit";
+    private static final String ADD_NEW_FILE = "INSERT INTO files(file_name, file_size, file_hash,file_data, upload_date, user_id) VALUES (:filename, :filesize,:filehash,:filedata,:uploaddate,:userid)";
+    private static final String DELETE_FILE_BY_ID_AND_NAME = "DELETE FROM files WHERE user_id=:userid and file_name =:filename";
+    private static final String COUNT_BY_ID_AND_NAME = "SELECT count(*) from files where user_id=:userid and file_name =:filename";
+    private static final String UPDATE_FILE_BY_ID_AND_NAME = "UPDATE files set file_name=:name where user_id=:userid and file_name=:filename";
+    private static final String SELECT_HASH_BY_ID_AND_NAME = "SELECT file_hash, file_data from files where user_id=:userid and file_name=:filename";
+    private static final String SELECT_FILES_WITH_LIMIT = "SELECT file_name, file_size from files LIMIT :limit";
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 

@@ -13,7 +13,7 @@ import java.util.Objects;
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
-public class UserInfo implements Serializable {
+public class UsersInfo implements Serializable {
     @Id
     @GeneratedValue
     private long id;
@@ -23,7 +23,7 @@ public class UserInfo implements Serializable {
     @NonNull
     private String password;
 
-    public UserInfo(String login, String password) {
+    public UsersInfo(String login, String password) {
         this.login = login;
         this.password = password;
     }
@@ -31,7 +31,7 @@ public class UserInfo implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserInfo userInfo)) return false;
+        if (!(o instanceof UsersInfo userInfo)) return false;
         return Objects.equals(login, userInfo.login) && Objects.equals(password, userInfo.password);
     }
 

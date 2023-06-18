@@ -1,11 +1,11 @@
 package ru.netology.diplomback.repository;
 
-import ru.netology.diplomback.model.UserInfo;
+import ru.netology.diplomback.model.UsersInfo;
 
 public interface UsersRepository {
-    UserInfo findUserByUserName(String userName);
+    UsersInfo findUserByUserName(String userName);
 
-    String addAuthToken(UserInfo userInfo);
+    String addAuthToken(UsersInfo userInfo);
 
     void deleteAuthToken(String authToken);
 

@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.netology.diplomback.model.UserInfo;
+import ru.netology.diplomback.model.UsersInfo;
 import ru.netology.diplomback.repository.UsersRepository;
 import ru.netology.diplomback.service.UserServiceImpl;
 
@@ -25,7 +25,7 @@ public class UserServiceTest {
         String login = "ivan";
         String password = "111";
         String authToken = "1234567890123456";
-        UserInfo userInfo = new UserInfo(login, password);
+        UsersInfo userInfo = new UsersInfo(login, password);
 
         Mockito.when(usersRepository.findUserByUserName(login)).thenReturn(userInfo);
         Mockito.when(usersRepository.addAuthToken(userInfo)).thenReturn(authToken);

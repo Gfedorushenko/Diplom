@@ -1,6 +1,4 @@
-create schema if not exists filestorage;
-
-create table if not exists filestorage.USERS
+create table if not exists USERS
 (
                            id serial primary key ,
                            login varchar(50) not null ,
@@ -8,7 +6,7 @@ create table if not exists filestorage.USERS
                            auth_token varchar(300)
 );
 
-create table if not exists filestorage.FILES
+create table if not exists FILES
 (
     id serial primary key ,
     file_name varchar(50) not null ,
@@ -20,8 +18,8 @@ create table if not exists filestorage.FILES
 );
 
 
-insert into filestorage.USERS(login, password)
+insert into USERS(login, password)
 values ('alexey',  '123');
 
-insert into filestorage.USERS(login, password)
+insert into USERS(login, password)
 values ('ivan',  '111');

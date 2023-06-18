@@ -17,61 +17,53 @@ import java.util.Map;
 public class MainController {
     private final FileService fileService;
     private final UserService userService;
-
     private Long userId;
 
-    public MainController(UserService userService,FileService fileService) {
-        this.userService=userService;
+    public MainController(UserService userService, FileService fileService) {
+        this.userService = userService;
         this.fileService = fileService;
-    }
-
-    @GetMapping("/ok") //TODO Для отладки
-    public String getAllOk() {
-        return "ok";
     }
 
     @PostMapping("/login")
     public String loginBack(@RequestBody Map<String, String> map) throws RuntimeException {
-        return userService.userAuthentication(new UserInfo(map.get("login"), map.get("password")));
+        return userService.userAuthentication(new UsersInfo(map.get("login"), map.get("password")));
     }
 
     @PostMapping("/logout")
-    public void logoutBack(@RequestHeader("auth-token") String authToken) {
-        userService.userLogout(authToken);
-    }
-
-    @GetMapping("/list")
-    public List<FileNameOut> getAllFiles(@RequestParam(name = "limit") int limit) {
-        return fileService.getFilesList(limit);
-    }
+    public void logoutBack(@RequestHeader("auth-token") String authToken) {userService.userLogout(authToken);}
 
     @PostMapping("/file")
     public void addFile(@RequestHeader("auth-token") String authToken,
-                        @RequestParam("filename") String fileName,
+                        @RequestParam(name = "filename") String fileName,
                         @RequestParam(name = "file") MultipartFile multipartFile) throws IOException {
-        userId=userService.userAuthorization(authToken);
-        fileService.fileSave(userId,fileName, multipartFile);
+        userId = userService.userAuthorization(authToken);
+        fileService.fileSave(userId, fileName, multipartFile);
     }
 
     @DeleteMapping("/file")
     public void deleteFile(@RequestHeader("auth-token") String authToken,
-                           @RequestParam("filename") String fileName) throws IOException {
-        userId=userService.userAuthorization(authToken);
+                           @RequestParam(name = "filename") String fileName) throws IOException {
+        userId = userService.userAuthorization(authToken);
         fileService.fileDelete(userId, fileName);
     }
 
     @GetMapping("/file")
     public FileOut getFile(@RequestHeader("auth-token") String authToken,
-                           @RequestParam("filename") String fileName) throws IOException {
-        userId=userService.userAuthorization(authToken);
+                           @RequestParam(name = "filename") String fileName) throws IOException {
+        userId = userService.userAuthorization(authToken);
         return fileService.fileGet(userId, fileName);
     }
 
     @PutMapping("/file")
     public void putFile(@RequestHeader("auth-token") String authToken,
-                        @RequestParam("filename") String fileName,
+                        @RequestParam(name = "filename") String fileName,
                         @RequestBody Map<String, String> map) {
-        userId=userService.userAuthorization(authToken);
+        userId = userService.userAuthorization(authToken);
         fileService.fileUpdate(userId, fileName, map.get("filename"));
+    }
+
+    @GetMapping("/list")
+    public List<FileNameOut> getAllFiles(@RequestParam(name = "limit") int limit) {
+        return fileService.getFilesList(limit);
     }
 }
