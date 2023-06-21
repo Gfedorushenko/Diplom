@@ -16,10 +16,10 @@ public class FileServiceImpl implements FileService {
     public FileServiceImpl(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
     }
-    public void fileSave(Long userId, String filename, MultipartFile multipartFile) throws RuntimeException, IOException {
+    public void fileSave(Long userId, String filename, Long size,byte[] data) throws RuntimeException, IOException {
         FileInfo fileInfo;
         try {
-            fileInfo = new FileInfo(filename, multipartFile.getSize(), multipartFile.getBytes(), userId,generateHash(multipartFile.getBytes()));
+            fileInfo = new FileInfo(filename, size, data, userId,generateHash(data));
         } catch (Exception e) {
             throw new DataError("Error input data");
         }

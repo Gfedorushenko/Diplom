@@ -37,7 +37,7 @@ public class MainController {
                         @RequestParam(name = "filename") String fileName,
                         @RequestParam(name = "file") MultipartFile multipartFile) throws IOException {
         userId = userService.userAuthorization(authToken);
-        fileService.fileSave(userId, fileName, multipartFile);
+        fileService.fileSave(userId, fileName, multipartFile.getSize(),multipartFile.getBytes());
     }
 
     @DeleteMapping("/file")

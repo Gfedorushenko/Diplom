@@ -56,7 +56,7 @@ public class FileServiceTest {
         FileInfo fileInfo = new FileInfo(fileName, size, data, userId,fileService.generateHash(data));
         MultipartFile multipartFile = new MockMultipartFile(fileName, data);
 
-        fileService.fileSave(userId, fileName, multipartFile);
+        fileService.fileSave(userId, fileName, multipartFile.getSize(), multipartFile.getBytes());
         Mockito.verify(fileRepository, Mockito.times(1)).save(fileInfo);
     }
 
@@ -115,7 +115,7 @@ public class FileServiceTest {
         String result = "Ok";
 
         try {
-            fileService.fileSave(userId, fileName, multipartFile);
+            fileService.fileSave(userId, fileName, multipartFile.getSize(), multipartFile.getBytes());
         } catch (Exception e) {
             result = e.getMessage();
         }

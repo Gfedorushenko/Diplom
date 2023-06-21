@@ -10,7 +10,7 @@ public interface FileService {
 
     List<FileNameOut> getFilesList(int limit) throws RuntimeException;
 
-    void fileSave(Long userId, String filename, MultipartFile multipartFile) throws RuntimeException, IOException;
+    void fileSave(Long userId, String filename, Long size,byte[] data) throws RuntimeException, IOException;
 
     void fileDelete(Long userId, String fileName) throws RuntimeException, IOException;
 
